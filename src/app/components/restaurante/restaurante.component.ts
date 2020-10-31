@@ -3,6 +3,7 @@ import {Restaurante} from '../../interfaces/restaurante';
 import {ActionSheetController} from '@ionic/angular';
 import {SocialSharing} from '@ionic-native/social-sharing/ngx';
 import {DataLocalService} from '../../services/data-local.service';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
     selector: 'app-restaurante',
@@ -16,6 +17,8 @@ export class RestauranteComponent implements OnInit {
     @Input() enFavoritos;
 
     constructor(private actionSheetController: ActionSheetController,
+                private socialSharing: SocialSharing,
+                private iab: InAppBrowser,
                 private dataLocalService: DataLocalService) {
     }
 
@@ -23,7 +26,7 @@ export class RestauranteComponent implements OnInit {
     }
 
     abrirRestaurante() {
-        // const browser = this.iab.create(this.restaurante.url, '_system');
+        const browser = this.iab.create(this.restaurante.url, '_system');
     }
 
     async lanzarMenu() {
@@ -59,12 +62,12 @@ export class RestauranteComponent implements OnInit {
                     cssClass: 'action-dark',
                     handler: () => {
                         console.log('Share clicked');
-                        // this.socialSharing.share(
-                        //     this.restaurante.nombre,
-                        //     this.restaurante.direccion,
-                        //     null, // file
-                        //     this.restaurante.url
-                        // );
+                        this.socialSharing.share(
+                            this.restaurante.nombre,
+                            this.restaurante.direccion,
+                            null, // file
+                            this.restaurante.url
+                        );
                     }
                 },
                 borrarBtn,

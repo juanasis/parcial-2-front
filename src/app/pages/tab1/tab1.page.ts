@@ -18,7 +18,7 @@ export class Tab1Page implements OnInit {
         this.restaurantesService.getRestaurantes().subscribe(resp => {
             console.log('restaurantes: ', resp);
 
-            if (resp.estado === 0) {
+            if (resp.status === 0) {
                 this.restaurantes = resp.data;
             }
         });

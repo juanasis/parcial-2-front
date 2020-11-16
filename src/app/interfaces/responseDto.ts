@@ -1,5 +1,5 @@
 export interface ResponseDto {
-    estado: number;
+    status: number;
     message: string;
     data: any;
 }

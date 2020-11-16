@@ -11,9 +11,8 @@ export class RestaurantesService {
     }
 
     getRestaurantes() {
-        // return this.httpClient.get<ResponseDto>(`http://localhost:8080/restaurantes`);
-        // return this.httpClient.get<ResponseDto>(`https://restaurantes.ekeepoit.com/restaurantes`);
-        return this.httpClient.get<ResponseDto>(`/assets/mocks/restaurantes.json`);
+        return this.httpClient.get<ResponseDto>(`http://localhost:8080/restaurantes`);
+        // return this.httpClient.get<ResponseDto>(`/assets/mocks/restaurantes.json`);
     }
 
     getCategorias() {

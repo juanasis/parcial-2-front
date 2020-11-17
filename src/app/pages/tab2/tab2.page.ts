@@ -21,13 +21,13 @@ export class Tab2Page implements OnInit {
 
     ngOnInit(): void {
         this.restaurantesService.getRestaurantes().subscribe(resp => {
-            if (resp.estado === 0) {
+            if (resp.status === 0) {
                 this.restaurantes = resp.data;
             }
         });
 
         this.restaurantesService.getCategorias().subscribe(resp => {
-            if (resp.estado === 0) {
+            if (resp.status === 0) {
                 this.categorias = resp.data;
                 this.segment.value = this.categorias[0].nombre;
 

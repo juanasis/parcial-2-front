@@ -1,9 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Restaurante} from '../../interfaces/restaurante';
-import {ActionSheetController} from '@ionic/angular';
+import {ActionSheetController, ModalController} from '@ionic/angular';
 import {SocialSharing} from '@ionic-native/social-sharing/ngx';
 import {DataLocalService} from '../../services/data-local.service';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
+import {ModalInfoPage} from '../../pages/modal-info/modal-info.page';
 
 @Component({
     selector: 'app-restaurante',
@@ -19,7 +20,8 @@ export class RestauranteComponent implements OnInit {
     constructor(private actionSheetController: ActionSheetController,
                 private socialSharing: SocialSharing,
                 private iab: InAppBrowser,
-                private dataLocalService: DataLocalService) {
+                private dataLocalService: DataLocalService,
+                private modalController: ModalController) {
     }
 
     ngOnInit() {
@@ -57,6 +59,15 @@ export class RestauranteComponent implements OnInit {
         const actionSheet = await this.actionSheetController.create({
             buttons: [
                 {
+                    text: 'Reservar',
+                    icon: 'book-outline',
+                    cssClass: 'action-dark',
+                    handler: () => {
+                        console.log('Reservar clicked');
+                        this.reservar(this.restaurante);
+                    }
+                },
+                {
                     text: 'Compartir',
                     icon: 'share',
                     cssClass: 'action-dark',
@@ -82,5 +93,22 @@ export class RestauranteComponent implements OnInit {
                 }]
         });
         await actionSheet.present();
+    }
+
+    async reservar(restaurante: Restaurante) {
+        console.log(`this.restaurante`);
+
+        const modal = await this.modalController.create({
+            component: ModalInfoPage,
+            componentProps: {
+                id: restaurante.id,
+                nombre: restaurante.nombre
+            }
+        });
+
+        await modal.present();
+
+        const {data} = await modal.onDidDismiss();
+        console.log(data);
     }
 }

@@ -10,13 +10,16 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import {IonicStorageModule} from '@ionic/storage';
-import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import {SocialSharing} from '@ionic-native/social-sharing/ngx';
 import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
+import {FormsModule} from '@angular/forms';
+import {ModalInfoPage} from './pages/modal-info/modal-info.page';
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [AppComponent, ModalInfoPage],
     entryComponents: [],
     imports: [BrowserModule,
+        FormsModule,
         IonicModule.forRoot(),
         AppRoutingModule,
         HttpClientModule,

@@ -1,0 +1,58 @@
+<ion-header no-border>
+    <ion-toolbar color="dark">
+        <ion-title>{{nombre}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+    <form #formulario="ngForm" (ngSubmit)="onSubmitTemplate()">
+        <ion-list-header color="dark">
+            <ion-label>Complete los datos</ion-label>
+        </ion-list-header>
+
+        <ion-list>
+            <ion-item color="dark">
+                <ion-label position="floating">Email</ion-label>
+                <ion-input type="email"
+                           name="email"
+                           pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
+                               [(ngModel)]="reserva.email"
+                           required></ion-input>
+            </ion-item>
+            <ion-item color="dark">
+                <ion-label>Fecha Reserva</ion-label>
+                <ion-datetime placeholder="Fecha"
+                              display-format="YYYY MM DD"
+                              cancelText="Cancelar!"
+                              name="fechaReserva"
+                              [ngModel]="fechaReserva.toISOString()"
+                              (ionChange)="cambioFecha($event)" required
+                              display-timezone="utc">
+                </ion-datetime>
+            </ion-item>
+            <ion-item color="dark">
+                <ion-label>hh:mm</ion-label>
+                <ion-datetime displayFormat="h:mm A" minuteValues="0,30"
+                              placeholder="Hora"
+                              name="horaReserva"
+                              [ngModel]="horaReserva.toISOString()"
+                              (ionChange)="cambioHora($event)" required>
+                </ion-datetime>
+            </ion-item>
+
+        </ion-list>
+
+        <ion-button color="secondary"
+                    expand="full"
+                    type="submit"
+                    [disabled]="formulario.invalid">
+            Reservar
+        </ion-button>
+
+        <ion-button color="primary"
+                    expand="full"
+                    (click)="salirSinParametros()">
+            Cancelar
+        </ion-button>
+    </form>
+</ion-content>
